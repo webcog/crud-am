@@ -38,6 +38,8 @@ def view_student(request):
 
 def updatestudent(request, id):
     student = get_object_or_404(Student,id=id)
+    # student = Student.objects.get(id=id)
+
     if request.method == "POST":
         student.first_name = request.POST.get('fname')
         student.last_name = request.POST.get('lname')
@@ -52,3 +54,13 @@ def updatestudent(request, id):
     }
     
     return render(request, 'update.html', context)
+
+
+
+def delete_student(request, id):
+    # student = get_object_or_404(Student,id=id)
+    student = Student.objects.get(id=id)
+    student.delete()
+    return redirect('view')
+
+
